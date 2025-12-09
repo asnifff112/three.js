@@ -22,10 +22,7 @@ export default function Navbar() {
           3D
         </Link>
 
-         <Link href="/sky" className={isActive("/sky")}>
-          sky
-        </Link>
-
+       
        
       </div>
     </nav>
