@@ -2,119 +2,95 @@
 
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, ContactShadows, Environment } from "@react-three/drei";
-import * as THREE from "three";
 import { useRef } from "react";
+import * as THREE from "three";
 
-function Juggler() {
-  const groupRef = useRef<THREE.Group | null>(null);
-  const ballRef = useRef<THREE.Mesh | null>(null);
-  const rightFootRef = useRef<THREE.Mesh | null>(null);
+// ---------------- DRONE ----------------
+function Drone() {
+  const droneRef = useRef<THREE.Group | null>(null);
+  const lightRef = useRef<THREE.Mesh | null>(null);
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
 
-    // Small idle movement for whole body
-    if (groupRef.current) {
-      groupRef.current.position.y = 0.05 * Math.sin(t * 2);
-      groupRef.current.rotation.y = Math.sin(t * 0.5) * 0.15;
+    // Floating motion
+    if (droneRef.current) {
+      droneRef.current.position.y = 2 + Math.sin(t * 2) * 0.4;
+      droneRef.current.rotation.y = t * 0.6;
+      droneRef.current.rotation.z = Math.sin(t) * 0.1;
     }
 
-    // Juggling motion
-    const speed = 2.5;
-    const cycle = t * speed;
-    const bounce = Math.abs(Math.sin(cycle)); // 0 → 1 → 0
-
-    if (ballRef.current) {
-      // Ball up & down
-      ballRef.current.position.y = 1.0 + bounce * 1.2;
-    }
-
-    if (rightFootRef.current) {
-      // Foot kicking motion
-      rightFootRef.current.rotation.x = -0.4 + bounce * 0.6;
+    // Blinking light effect
+    if (lightRef.current) {
+      const blink = Math.abs(Math.sin(t * 4));
+      (lightRef.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
+        blink * 5;
     }
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, 0]}>
-      {/* Torso */}
-      <mesh castShadow position={[0, 1.4, 0]}>
-        <boxGeometry args={[0.6, 1.2, 0.3]} />
-        <meshStandardMaterial color={"#1e90ff"} />
+    <group ref={droneRef}>
+      {/* MAIN BODY */}
+      <mesh castShadow>
+        <cylinderGeometry args={[0.6, 0.8, 0.3, 32]} />
+        <meshStandardMaterial color="#222222" metalness={0.6} roughness={0.3} />
       </mesh>
 
-      {/* Head */}
-      <mesh castShadow position={[0, 2.2, 0]}>
-        <sphereGeometry args={[0.25, 32, 32]} />
-        <meshStandardMaterial color={"#ffcc99"} />
+      {/* CAMERA EYE */}
+      <mesh position={[0, -0.15, 0.5]}>
+        <sphereGeometry args={[0.12, 32, 32]} />
+        <meshStandardMaterial color="black" />
       </mesh>
 
-      {/* Left leg */}
-      <mesh castShadow position={[-0.15, 0.45, 0]}>
-        <boxGeometry args={[0.18, 0.9, 0.18]} />
-        <meshStandardMaterial color={"#00aa88"} />
+      {/* SIGNAL LIGHT */}
+      <mesh ref={lightRef} position={[0, 0.2, 0]}>
+        <sphereGeometry args={[0.07, 16, 16]} />
+        <meshStandardMaterial
+          emissive="red"
+          color="red"
+          emissiveIntensity={1}
+        />
       </mesh>
 
-      {/* Right leg */}
-      <mesh castShadow position={[0.15, 0.45, 0]}>
-        <boxGeometry args={[0.18, 0.9, 0.18]} />
-        <meshStandardMaterial color={"#00aa88"} />
-      </mesh>
-
-      {/* Right foot (kicking) */}
-      <mesh
-        ref={rightFootRef}
-        castShadow
-        position={[0.22, -0.05, 0.18]}
-        rotation={[-0.4, 0, 0]}
-      >
-        <boxGeometry args={[0.32, 0.12, 0.4]} />
-        <meshStandardMaterial color={"#ffffff"} />
-      </mesh>
-
-      {/* Ball */}
-      <mesh ref={ballRef} castShadow position={[0.22, 1.0, 0.18]}>
-        <sphereGeometry args={[0.22, 32, 32]} />
-        <meshStandardMaterial color={"white"} />
-      </mesh>
+      {/* PROPELLERS */}
+      {[-0.6, 0.6].map((x) =>
+        [-0.6, 0.6].map((z) => (
+          <mesh key={`${x}-${z}`} position={[x, 0.15, z]}>
+            <cylinderGeometry args={[0.3, 0.3, 0.05, 16]} />
+            <meshStandardMaterial color="gray" />
+          </mesh>
+        ))
+      )}
     </group>
   );
 }
 
-export default function page() {
+// ---------------- MAIN PAGE ----------------
+export default function Home() {
   return (
     <main className="w-screen h-screen bg-black">
-      <Canvas
-        shadows
-        camera={{ position: [0, 2.5, 6], fov: 45 }}
-      >
+      <Canvas camera={{ position: [0, 3, 7], fov: 45 }} shadows>
         {/* Lights */}
         <ambientLight intensity={0.4} />
-        <directionalLight
-          castShadow
-          position={[4, 8, 4]}
-          intensity={1.1}
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
-        />
+        <directionalLight castShadow position={[5, 8, 5]} intensity={1} />
 
-        {/* Ground shadow */}
+        {/* Environment */}
+        <Environment preset="warehouse" />
+
+        {/* Shadow under drone */}
         <ContactShadows
-          opacity={0.6}
+          position={[0, 0, 0]}
+          opacity={0.7}
           scale={10}
           blur={2.5}
-          far={4.5}
-          resolution={1024}
+          far={4}
         />
 
-        {/* Environment lighting */}
-        <Environment preset="city" />
+        {/* Drone */}
+        <Drone />
 
-        {/* Our juggler */}
-        <Juggler />
-
-        {/* Camera controls (mouse move) */}
-        <OrbitControls enablePan={false} />
+        {/* Camera motion */}
+        <OrbitControls enableZoom={false} />
       </Canvas>
     </main>
   );
