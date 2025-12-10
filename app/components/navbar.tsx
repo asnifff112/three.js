@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full p-4 shadow-sm bg-black flex justify-between items-center">
-      <h1 className="text-white-600 font-bold">MyApp</h1>
+      <h1 className="text-white-600 font-bold">Three js</h1>
 
       <div className="flex gap-6">
         <Link href="/" className={isActive("/")}>
