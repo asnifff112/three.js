@@ -22,9 +22,7 @@ export default function Navbar() {
           3D
         </Link>
 
-          <Link href="/last" className={isActive("/last")}>
-          prjct
-        </Link>
+       
 
        
 
