@@ -5,7 +5,6 @@ import { OrbitControls, ContactShadows, Environment } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
 
-// ---------------- DRONE ----------------
 function Drone() {
   const droneRef = useRef<THREE.Group | null>(null);
   const lightRef = useRef<THREE.Mesh | null>(null);
@@ -13,14 +12,14 @@ function Drone() {
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
 
-    // Floating motion
+  
     if (droneRef.current) {
       droneRef.current.position.y = 2 + Math.sin(t * 2) * 0.4;
       droneRef.current.rotation.y = t * 0.6;
       droneRef.current.rotation.z = Math.sin(t) * 0.1;
     }
 
-    // Blinking light effect
+   
     if (lightRef.current) {
       const blink = Math.abs(Math.sin(t * 4));
       (lightRef.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
