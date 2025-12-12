@@ -18,8 +18,8 @@ export default function Navbar() {
           Home
         </Link>
 
-        <Link href="/3D" className={isActive("/3D")}>
-          3D
+        <Link href="/drone" className={isActive("/drone")}>
+          drone
         </Link>
 
         <Link href="/box" className={isActive("/box")}>
