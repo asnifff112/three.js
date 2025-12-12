@@ -22,6 +22,10 @@ export default function Navbar() {
           3D
         </Link>
 
+        <Link href="/box" className={isActive("/box")}>
+          box
+        </Link>
+
        
 
        
