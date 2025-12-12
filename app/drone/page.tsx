@@ -29,19 +29,19 @@ function Drone() {
 
   return (
     <group ref={droneRef}>
-      {/* MAIN BODY */}
+
       <mesh castShadow>
         <cylinderGeometry args={[0.6, 0.8, 0.3, 32]} />
         <meshStandardMaterial color="#222222" metalness={0.6} roughness={0.3} />
       </mesh>
 
-      {/* CAMERA EYE */}
+   
       <mesh position={[0, -0.15, 0.5]}>
         <sphereGeometry args={[0.12, 32, 32]} />
         <meshStandardMaterial color="black" />
       </mesh>
 
-      {/* SIGNAL LIGHT */}
+      
       <mesh ref={lightRef} position={[0, 0.2, 0]}>
         <sphereGeometry args={[0.07, 16, 16]} />
         <meshStandardMaterial
@@ -51,7 +51,7 @@ function Drone() {
         />
       </mesh>
 
-      {/* PROPELLERS */}
+    
       {[-0.6, 0.6].map((x) =>
         [-0.6, 0.6].map((z) => (
           <mesh key={`${x}-${z}`} position={[x, 0.15, z]}>
@@ -64,19 +64,13 @@ function Drone() {
   );
 }
 
-// ---------------- MAIN PAGE ----------------
 export default function Home() {
   return (
     <main className="w-screen h-screen bg-black">
       <Canvas camera={{ position: [0, 3, 7], fov: 45 }} shadows>
-        {/* Lights */}
         <ambientLight intensity={0.4} />
         <directionalLight castShadow position={[5, 8, 5]} intensity={1} />
-
-        {/* Environment */}
         <Environment preset="warehouse" />
-
-        {/* Shadow under drone */}
         <ContactShadows
           position={[0, 0, 0]}
           opacity={0.7}
@@ -84,11 +78,7 @@ export default function Home() {
           blur={2.5}
           far={4}
         />
-
-        {/* Drone */}
         <Drone />
-
-        {/* Camera motion */}
         <OrbitControls enableZoom={false} />
       </Canvas>
     </main>
