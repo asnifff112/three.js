@@ -28,3 +28,30 @@ function RotatingBox() {
 // -------------------------
 // MAIN PAGE
 // -------------------------
+export default function Home() {
+  return (
+    <main className="w-screen h-screen bg-black">
+      <Canvas
+        shadows
+        camera={{ position: [3, 3, 6], fov: 50 }}
+      >
+        {/* LIGHTS */}
+        <ambientLight intensity={0.4} />
+        <directionalLight
+          position={[5, 10, 5]}
+          intensity={1}
+          castShadow
+        />
+
+        {/* ENVIRONMENT MAP */}
+        <Environment preset="sunset" />
+
+        {/* CAMERA CONTROLS */}
+        <OrbitControls enableDamping />
+
+        {/* 3D OBJECT */}
+        <RotatingBox />
+      </Canvas>
+    </main>
+  );
+}
