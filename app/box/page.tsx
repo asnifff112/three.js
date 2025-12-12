@@ -5,13 +5,8 @@ import { OrbitControls, Environment } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
 
-// -------------------------
-// SIMPLE ANIMATED BOX
-// -------------------------
 function RotatingBox() {
   const boxRef = useRef<THREE.Mesh>(null!);
-
-  // useFrame → animation loop
   useFrame((state, delta) => {
     boxRef.current.rotation.x += 0.5 * delta;
     boxRef.current.rotation.y += 0.8 * delta;
