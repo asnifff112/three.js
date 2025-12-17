@@ -73,14 +73,14 @@ export default function SolarSystem() {
         <Sun />
 
         {/* 8 Real Planets */}
-        <Planet distance={3} size={0.25} orbitalPeriod={88} textureUrl="/imgg/mercury.jpg" />
-        <Planet distance={4} size={0.35} orbitalPeriod={225} textureUrl="/imgg/mercury.jpg" />
-        <Planet distance={5} size={0.4} orbitalPeriod={365} textureUrl="/imgg/mercury.jpg" />
-        <Planet distance={6} size={0.3} orbitalPeriod={687}  textureUrl="/imgg/mercury.jpg" />
-        <Planet distance={8} size={0.9} orbitalPeriod={4333}  textureUrl="/imgg/mercury.jpg" />
-        <Planet distance={10} size={0.8} orbitalPeriod={10759}  textureUrl="/imgg/mercury.jpg" />
-        <Planet distance={12} size={0.6} orbitalPeriod={30687}  textureUrl="/imgg/mercury.jpg" />
-        <Planet distance={14} size={0.6} orbitalPeriod={60190}  textureUrl="/imgg/mercury.jpg" />
+        <Planet distance={3} size={0.25} orbitalPeriod={88} textureUrl="/imgg/mercurymap.jpg" />
+        <Planet distance={4} size={0.35} orbitalPeriod={225} textureUrl="/imgg/venuss.jpg" />
+        <Planet distance={5} size={0.4} orbitalPeriod={365} textureUrl="/imgg/earth.jpg" />
+        <Planet distance={6} size={0.3} orbitalPeriod={687} textureUrl="/imgg/mars.jpg" />
+        <Planet distance={8} size={0.9} orbitalPeriod={4333} textureUrl="/imgg/jupiter.jpg" />
+        <Planet distance={10} size={0.8} orbitalPeriod={10759} textureUrl="/imgg/saturn.jpg" />
+        <Planet distance={12} size={0.6} orbitalPeriod={30687} textureUrl="/imgg/uranus.jpg" />
+        <Planet distance={14} size={0.6} orbitalPeriod={60190} textureUrl="/imgg/neptune.jpg" />
 
         <OrbitControls enableZoom />
       </Canvas>
