@@ -1,48 +1,60 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
+
+/* ⏩ Time scale */
+const TIME_SCALE = 50;
 
 /* ---------- Planet Component ---------- */
 function Planet({
   distance,
   size,
-  speed,
-  color,
+  orbitalPeriod,
+  textureUrl,
 }: {
   distance: number;
   size: number;
-  speed: number;
-  color: string;
+  orbitalPeriod: number;
+  textureUrl: string;
 }) {
   const ref = useRef<THREE.Mesh>(null!);
+  const texture = useLoader(THREE.TextureLoader, textureUrl);
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
+    const speed = (1 / orbitalPeriod) * TIME_SCALE;
+
     ref.current.position.x = Math.sin(t * speed) * distance;
     ref.current.position.z = Math.cos(t * speed) * distance;
-    ref.current.rotation.y += 0.01;
+
+    ref.current.rotation.y += 0.005;
   });
 
   return (
     <mesh ref={ref}>
-      <sphereGeometry args={[size, 32, 32]} />
-      <meshStandardMaterial color={color} />
+      <sphereGeometry args={[size, 64, 64]} />
+      <meshStandardMaterial map={texture} />
     </mesh>
   );
 }
 
 /* ---------- Sun ---------- */
 function Sun() {
+  const sunTexture = useLoader(
+    THREE.TextureLoader,
+    "/imgg/sun.jpg"
+  );
+
   return (
     <mesh>
-      <sphereGeometry args={[1.8, 32, 32]} />
+      <sphereGeometry args={[1.8, 64, 64]} />
       <meshStandardMaterial
+        map={sunTexture}
         emissive="orange"
-        emissiveIntensity={2}
-        color="yellow"
+        emissiveIntensity={1.5}
       />
     </mesh>
   );
@@ -52,28 +64,24 @@ function Sun() {
 export default function SolarSystem() {
   return (
     <main className="w-screen h-screen bg-black">
-      <Canvas camera={{ position: [0, 8, 18], fov: 50 }}>
-        {/* Lights */}
+      <Canvas camera={{ position: [0, 10, 20], fov: 50 }}>
         <ambientLight intensity={0.3} />
         <pointLight position={[0, 0, 0]} intensity={2} />
 
-        {/* Background Stars */}
-        <Stars radius={100} depth={50} count={5000} factor={4} />
+        <Stars radius={200} depth={60} count={7000} factor={4} />
 
-        {/* Sun */}
         <Sun />
 
-        {/* 8 Planets */}
-        <Planet distance={3} size={0.25} speed={1.6} color="#aaa" />   {/* Mercury */}
-        <Planet distance={4} size={0.35} speed={1.3} color="#d4af37" /> {/* Venus */}
-        <Planet distance={5} size={0.4} speed={1} color="#2a6df4" />   {/* Earth */}
-        <Planet distance={6} size={0.3} speed={0.8} color="#c1440e" /> {/* Mars */}
-        <Planet distance={8} size={0.9} speed={0.4} color="#d2b48c" /> {/* Jupiter */}
-        <Planet distance={10} size={0.8} speed={0.3} color="#deb887" />{/* Saturn */}
-        <Planet distance={12} size={0.6} speed={0.2} color="#7fffd4" />{/* Uranus */}
-        <Planet distance={14} size={0.6} speed={0.15} color="#4169e1" />{/* Neptune */}
+        {/* 8 Real Planets */}
+        <Planet distance={3} size={0.25} orbitalPeriod={88} textureUrl="/imgg/mercury.jpg" />
+        <Planet distance={4} size={0.35} orbitalPeriod={225} textureUrl="/imgg/venus.jpg" />
+        <Planet distance={5} size={0.4} orbitalPeriod={365} textureUrl="/imgg/earth.jpg" />
+        <Planet distance={6} size={0.3} orbitalPeriod={687} textureUrl="/imgg/mars.jpg" />
+        <Planet distance={8} size={0.9} orbitalPeriod={4333} textureUrl="/imgg/jupiter.jpg" />
+        <Planet distance={10} size={0.8} orbitalPeriod={10759} textureUrl="/imgg/saturn.jpg" />
+        <Planet distance={12} size={0.6} orbitalPeriod={30687} textureUrl="/imgg/uranus.jpg" />
+        <Planet distance={14} size={0.6} orbitalPeriod={60190} textureUrl="/imgg/neptune.jpg" />
 
-        {/* Controls */}
         <OrbitControls enableZoom />
       </Canvas>
     </main>
