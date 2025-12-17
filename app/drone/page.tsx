@@ -12,7 +12,6 @@ function Drone() {
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
 
-  
     if (droneRef.current) {
       droneRef.current.position.y = 2 + Math.sin(t * 2) * 0.4;
       droneRef.current.rotation.y = t * 0.6;
