@@ -45,7 +45,7 @@ function Planet({
 function Sun() {
   const sunTexture = useLoader(
     THREE.TextureLoader,
-    "/imgg/sun.jpg"
+    "/imgg/sunn.jpg"
   );
 
   return (
@@ -74,7 +74,7 @@ export default function SolarSystem() {
 
         {/* 8 Real Planets */}
         <Planet distance={3} size={0.25} orbitalPeriod={88} textureUrl="/imgg/mercurymap.jpg" />
-        <Planet distance={4} size={0.35} orbitalPeriod={225} textureUrl="/imgg/venuss.jpg" />
+        <Planet distance={4} size={0.35} orbitalPeriod={225} textureUrl="/imgg/venuess.jpg" />
         <Planet distance={5} size={0.4} orbitalPeriod={365} textureUrl="/imgg/earth.jpg" />
         <Planet distance={6} size={0.3} orbitalPeriod={687} textureUrl="/imgg/mars.jpg" />
         <Planet distance={8} size={0.9} orbitalPeriod={4333} textureUrl="/imgg/jupiter.jpg" />
