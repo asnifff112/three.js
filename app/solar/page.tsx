@@ -66,7 +66,7 @@ function Sun() {
        
         emissiveIntensity={1.5}
       />
-    </mesh>
+    </mesh>   
   );
 }
 
