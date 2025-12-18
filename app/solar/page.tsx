@@ -5,10 +5,8 @@ import { OrbitControls, Stars } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
 
-/* ⏩ Time scale */
 const TIME_SCALE = 50;
 
-/* ---------- Orbit Ring ---------- */
 function OrbitRing({ radius }: { radius: number }) {
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]}>
@@ -23,7 +21,6 @@ function OrbitRing({ radius }: { radius: number }) {
   );
 }
 
-/* ---------- Planet ---------- */
 function Planet({
   distance,
   size,
@@ -55,7 +52,6 @@ function Planet({
   );
 }
 
-/* ---------- Sun ---------- */
 function Sun() {
   const sunTexture = useLoader(
     THREE.TextureLoader,
@@ -74,16 +70,14 @@ function Sun() {
   );
 }
 
-/* ---------- Solar System ---------- */
 export default function SolarSystem() {
   return (
     <main className="w-screen h-screen bg-black">
       <Canvas camera={{ position: [0, 10, 20], fov: 50 }}>
-        {/* Lights */}
+  
         <ambientLight intensity={0.3} />
         <pointLight position={[0, 0, 0]} intensity={2} />
 
-        {/* Background */}
         <Stars radius={200} depth={60} count={7000} factor={4} />
 
         <Sun />
