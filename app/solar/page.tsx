@@ -8,7 +8,22 @@ import * as THREE from "three";
 /* ⏩ Time scale */
 const TIME_SCALE = 50;
 
-/* ---------- Planet Component ---------- */
+/* ---------- Orbit Ring ---------- */
+function OrbitRing({ radius }: { radius: number }) {
+  return (
+    <mesh rotation={[-Math.PI / 2, 0, 0]}>
+      <ringGeometry args={[radius - 0.02, radius + 0.02, 128]} />
+      <meshBasicMaterial
+        color="white"
+        transparent
+        opacity={0.4}
+        side={THREE.DoubleSide}
+      />
+    </mesh>
+  );
+}
+
+/* ---------- Planet ---------- */
 function Planet({
   distance,
   size,
@@ -29,7 +44,6 @@ function Planet({
 
     ref.current.position.x = Math.sin(t * speed) * distance;
     ref.current.position.z = Math.cos(t * speed) * distance;
-
     ref.current.rotation.y += 0.005;
   });
 
@@ -53,7 +67,7 @@ function Sun() {
       <sphereGeometry args={[1.8, 64, 64]} />
       <meshStandardMaterial
         map={sunTexture}
-        emissive="orange"
+       
         emissiveIntensity={1.5}
       />
     </mesh>
@@ -65,14 +79,23 @@ export default function SolarSystem() {
   return (
     <main className="w-screen h-screen bg-black">
       <Canvas camera={{ position: [0, 10, 20], fov: 50 }}>
+        {/* Lights */}
         <ambientLight intensity={0.3} />
         <pointLight position={[0, 0, 0]} intensity={2} />
 
+        {/* Background */}
         <Stars radius={200} depth={60} count={7000} factor={4} />
 
         <Sun />
+        <OrbitRing radius={3} />
+        <OrbitRing radius={4} />
+        <OrbitRing radius={5} />
+        <OrbitRing radius={6} />
+        <OrbitRing radius={8} />
+        <OrbitRing radius={10} />
+        <OrbitRing radius={12} />
+        <OrbitRing radius={14} />
 
-        {/* 8 Real Planets */}
         <Planet distance={3} size={0.25} orbitalPeriod={88} textureUrl="/imgg/mercurymap.jpg" />
         <Planet distance={4} size={0.35} orbitalPeriod={225} textureUrl="/imgg/venuess.jpg" />
         <Planet distance={5} size={0.4} orbitalPeriod={365} textureUrl="/imgg/earth.jpg" />
@@ -81,7 +104,6 @@ export default function SolarSystem() {
         <Planet distance={10} size={0.8} orbitalPeriod={10759} textureUrl="/imgg/saturn.jpg" />
         <Planet distance={12} size={0.6} orbitalPeriod={30687} textureUrl="/imgg/uranus.jpg" />
         <Planet distance={14} size={0.6} orbitalPeriod={60190} textureUrl="/imgg/neptune.jpg" />
-
         <OrbitControls enableZoom />
       </Canvas>
     </main>
