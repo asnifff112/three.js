@@ -17,7 +17,6 @@ export default function Navbar() {
         <Link href="/" className={isActive("/")}>
           Home
         </Link>
-
         <Link href="/drone" className={isActive("/drone")}>
           drone
         </Link>
