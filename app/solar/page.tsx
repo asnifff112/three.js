@@ -79,7 +79,6 @@ export default function SolarSystem() {
         <pointLight position={[0, 0, 0]} intensity={2} />
 
         <Stars radius={200} depth={60} count={7000} factor={4} />
-
         <Sun />
         <OrbitRing radius={3} />
         <OrbitRing radius={4} />
