@@ -21,7 +21,6 @@ export default function Navbar() {
         <Link href="/drone" className={isActive("/drone")}>
           drone
         </Link>
-
          <Link href="/solar" className={isActive("/solar")}>
           solar system
         </Link>
