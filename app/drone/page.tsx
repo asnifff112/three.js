@@ -28,13 +28,11 @@ function Drone() {
 
   return (
     <group ref={droneRef}>
-
       <mesh castShadow>
         <cylinderGeometry args={[0.6, 0.8, 0.3, 32]} />
         <meshStandardMaterial color="#222222" metalness={0.6} roughness={0.3} />
       </mesh>
 
-   
       <mesh position={[0, -0.15, 0.5]}>
         <sphereGeometry args={[0.12, 32, 32]} />
         <meshStandardMaterial color="black" />
