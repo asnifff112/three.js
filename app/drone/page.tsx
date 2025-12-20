@@ -39,7 +39,6 @@ function Drone() {
         <sphereGeometry args={[0.12, 32, 32]} />
         <meshStandardMaterial color="black" />
       </mesh>
-
       
       <mesh ref={lightRef} position={[0, 0.2, 0]}>
         <sphereGeometry args={[0.07, 16, 16]} />
@@ -50,7 +49,6 @@ function Drone() {
         />
       </mesh>
 
-    
       {[-0.6, 0.6].map((x) =>
         [-0.6, 0.6].map((z) => (
           <mesh key={`${x}-${z}`} position={[x, 0.15, z]}>
@@ -79,7 +77,7 @@ export default function Home() {
         />
 
         <Drone />
-        
+
         <OrbitControls enableZoom={false} />
       </Canvas>
     </main>
