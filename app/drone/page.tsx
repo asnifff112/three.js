@@ -63,7 +63,7 @@ function Drone() {
   );
 }
 
-export default function Home() {
+export default function Home() { 
   return (
     <main className="w-screen h-screen bg-black">
       <Canvas camera={{ position: [0, 3, 7], fov: 45 }} shadows>
@@ -77,7 +77,9 @@ export default function Home() {
           blur={2.5}
           far={4}
         />
+
         <Drone />
+        
         <OrbitControls enableZoom={false} />
       </Canvas>
     </main>
