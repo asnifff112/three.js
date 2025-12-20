@@ -18,7 +18,6 @@ function Drone() {
       droneRef.current.rotation.z = Math.sin(t) * 0.1;
     }
 
-   
     if (lightRef.current) {
       const blink = Math.abs(Math.sin(t * 4));
       (lightRef.current.material as THREE.MeshStandardMaterial).emissiveIntensity =
