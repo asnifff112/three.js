@@ -74,8 +74,9 @@ export default function Home() {
         />
 
         <Drone />
-        
+
         <OrbitControls enableZoom={false} />
+        
       </Canvas>
     </main>
   );
