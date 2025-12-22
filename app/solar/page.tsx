@@ -75,7 +75,7 @@ export default function SolarSystem() {
     <main className="w-screen h-screen bg-black">
       <Canvas camera={{ position: [0, 10, 20], fov: 50 }}>
   
-        <ambientLight intensity={0.3} />
+        <ambientLight intensity={1} />
         <pointLight position={[0, 0, 0]} intensity={2} />
 
         <Stars radius={200} depth={60} count={7000} factor={4} />
