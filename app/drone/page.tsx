@@ -61,6 +61,7 @@ function Drone() {
 export default function Home() { 
   return (
     <main className="w-screen h-screen bg-black">
+      
       <Canvas camera={{ position: [0, 3, 7], fov: 45 }} shadows>
         <ambientLight intensity={0.4} />
         <directionalLight castShadow position={[5, 8, 5]} intensity={1} />
@@ -78,7 +79,7 @@ export default function Home() {
         <OrbitControls enableZoom={false} />
 
       </Canvas>
-      
+
     </main>
   );
 }
