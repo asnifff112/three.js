@@ -72,9 +72,7 @@ export default function Home() {
           blur={2.5}
           far={4}
         />
-
         <Drone />
-
         <OrbitControls enableZoom={false} />
       </Canvas>
     </main>
