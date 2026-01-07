@@ -20,6 +20,9 @@ export default function Navbar() {
          <Link href="/solar" className={isActive("/solar")}>
           solar system
         </Link>
+          <Link href="/earth" className={isActive("/earth")}>
+          earth
+        </Link>
       </div>
     </nav>
   );
