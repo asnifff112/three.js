@@ -20,7 +20,6 @@ function OrbitRing({ radius }: { radius: number }) {
     </mesh>
   );
 }
-
 function Planet({
   distance,
   size,
