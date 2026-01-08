@@ -11,7 +11,7 @@ function RotatingBox() {
     boxRef.current.rotation.x += 0.5 * delta;
     boxRef.current.rotation.y += 0.8 * delta;
   });
-  
+
   return (
     <mesh ref={boxRef} castShadow receiveShadow>
       <boxGeometry args={[1.5, 1.5, 1.5]} />
@@ -20,10 +20,10 @@ function RotatingBox() {
   );
 }
 
-
 export default function Home() {
   return (
     <main className="w-screen h-screen bg-black">
+
       <Canvas
         shadows
         camera={{ position: [3, 3, 6], fov: 50 }}
@@ -37,6 +37,7 @@ export default function Home() {
         <Environment preset="sunset" />
         <OrbitControls enableDamping />
         <RotatingBox />
+        
       </Canvas>
     </main>
   );
