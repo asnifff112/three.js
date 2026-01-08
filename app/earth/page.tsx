@@ -50,7 +50,7 @@ export default function App() {
           castShadow={true}
         />
         <Sparkles
-          count={1000}
+          count={2000}
           speed={0.3}
           scale={10}
           size={1.5}
