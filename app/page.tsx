@@ -11,7 +11,6 @@ function RotatingBox() {
     boxRef.current.rotation.x += 0.5 * delta;
     boxRef.current.rotation.y += 0.8 * delta;
   });
-
   return (
     <mesh ref={boxRef} castShadow receiveShadow>
       <boxGeometry args={[1.5, 1.5, 1.5]} />
